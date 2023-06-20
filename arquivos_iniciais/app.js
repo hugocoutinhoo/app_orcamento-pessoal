@@ -61,6 +61,10 @@ class Bd {
 			return despesas
 		}
 	}
+
+	pesquisar(despesa) {
+		console.log(despesa)
+	}
 }
 
 let bd = new Bd()
@@ -93,7 +97,15 @@ function cadastrarDespesa() {
 		document.getElementById('modal_btn').innerHTML = 'Voltar'
 		document.getElementById('modal_btn').className = 'btn btn-success'
 		
+		//dialog de sucesso
 		$('#modalRegistraDespesa').modal('show')
+
+		ano.value = ''
+		mes.value = ''
+		dia.value = ''
+		tipo.value = ''
+		descricao.value = ''
+		valor.value = ''
 	} else {
 
 		document.getElementById('modal_titulo').innerHTML = 'Erro na inclusão do registro.'
@@ -102,6 +114,7 @@ function cadastrarDespesa() {
 		document.getElementById('modal_btn').innerHTML = 'Voltar e corrigir'
 		document.getElementById('modal_btn').className = 'btn btn-danger'
 
+		//dialog de erro
 		$('#modalRegistraDespesa').modal('show')
 	}
 	
@@ -154,4 +167,17 @@ function carregaListaDespesas() {
 		linha.insertCell(2).innerHTML = d.descricao
 		linha.insertCell(3).innerHTML = d.valor
 	})
+}
+
+function pesquisarDespesa() {
+	let ano = document.getElementById('ano').value
+	let mes = document.getElementById('mes').value  
+	let dia = document.getElementById('dia').value 
+	let tipo = document.getElementById('tipo').value
+	let descricao = document.getElementById('descricao').value
+	let valor = document.getElementById('valor').value
+
+	let despesa = new Despesa(ano, mes, dia, tipo, descricao, valor)
+
+	bd.pesquisar(despesa)
 }
